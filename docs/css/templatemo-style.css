@@ -169,15 +169,16 @@ h1,h2,h3,h4,h5
 /* end simpletextrotator */
 
 /* start home */       
-#home
-	{
-        background: url('../images/bg-3.jpg');
-        background-size: cover;
-        background-repeat: no-repeat;
-        padding-top: 120px;
-        padding-bottom: 140px;
-        text-align: center;
-	}
+#home {
+    background: url('../images/bg-4.png');
+    background-size: contain;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-color: #0c0c0c; /* fallback behind image */
+    padding-top: 120px;
+    padding-bottom: 120px;
+}
+
 #home h3 {
     color: #ffffff;
     font-weight: 700;
@@ -199,16 +200,38 @@ h1,h2,h3,h4,h5
     transition: 0.3s ease;
     box-shadow: 0px 6px 25px rgba(212,63,82,0.6);
 }
-#home h1 {
-    color: #D43F52;
-    font-size: 38px;
+/* 3D Depth Effect for Name */
+.shine-text {
+    font-size: 42px;
     font-weight: 900;
-    letter-spacing: 8px;
-    text-shadow: 0 3px 12px rgba(0,0,0,0.6);
+    color: #C38BFF;
+    position: relative;
+    overflow: hidden;
 }
 
+.shine-text::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(120deg,
+        transparent 0%,
+        rgba(255,255,255,0.4) 50%,
+        transparent 100%);
+    animation: shineMove 3s infinite;
+}
+
+@keyframes shineMove {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+
+
 #home h2 {
-    color: #ffffff;
+    color: #C8C8C8;            /* soft, clean grey */
     font-weight: 800;
     font-size: 26px;
     letter-spacing: 2px;
@@ -217,7 +240,7 @@ h1,h2,h3,h4,h5
 }
 
 #home p {
-    color: #e0e0e0;
+    color: #DADADA;
     font-size: 17px;
     line-height: 1.6;
     font-weight: 500;
@@ -227,8 +250,8 @@ h1,h2,h3,h4,h5
 #home .btn
     {
         background: transparent;
-        border: 2px solid #ffffff;
-        color: #ffffff;
+    border: 2px solid #C38BFF;     /* purple border */
+    color: #C38BFF;                /* purple text */
         font-size: 16px;
         font-weight: bold;
         width: 180px;
@@ -239,8 +262,10 @@ h1,h2,h3,h4,h5
     }
 #home .btn:hover
     {
-        background: #D43F52;
-        border-color: transparent;
+            background: #C38BFF;           /* fill with purple */
+    border-color: #C38BFF;
+        color: #0B0B0B;                /* dark text on purple */
+
     }
     #home .home-content {
     text-align: left !important;
@@ -265,9 +290,9 @@ h1,h2,h3,h4,h5
 	
 #work .media .fa
     {
-        border: 2px solid #ffffff;
+    border: 2px solid #C38BFF;               /* Purple Border */
         border-radius: 50%;
-        color: #D43F52;
+        color: #C38BFF;
         font-size: 24px;
         margin-right: 24px;
         width: 60px;
@@ -277,17 +302,21 @@ h1,h2,h3,h4,h5
         vertical-align: middle;
         transition: all 0.4s ease-in;
     }
-#work .media .fa:hover
-    {
-        background: #ffffff;
-        cursor: pointer;
-    }
-#work .media .media-heading
-    {
-        font-weight: 600;
-        font-size: 20px;
-        padding-bottom: 10px;
-    }
+#work .media .fa:hover {
+    background: #C38BFF;                      /* Purple Fill */
+    color: #0B0B0B;                           /* Dark Icon Inside */
+    border-color: #C38BFF;
+    box-shadow: 0 0 16px rgba(195,139,255,0.45);
+    cursor: pointer;
+    transform: translateY(-3px);              /* Slight Lift */
+}
+/* SECTION HEADINGS */
+#work .media .media-heading {
+    font-weight: 600;
+    font-size: 20px;
+    padding-bottom: 10px;
+    color: #FFFFFF;
+}
 /* end work */
 
 /* start about */
