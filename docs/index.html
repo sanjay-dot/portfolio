@@ -176,71 +176,72 @@
 			</div>
 		</div>
 
-
 		<!-- CASE STUDIES -->
 		<div id="case-studies" class="section">
 			<div class="container">
-				<h2 class="wow fadeIn text-center">CASE STUDIES</h2>
+				<h2 class="wow fadeIn text-center">What I’ve Built</h2>
 
-				<div class="masonry-grid">
+				<div class="project-grid">
 
-					<!-- BOX 1 -->
-					<div class="masonry-item wow fadeInUp" data-wow-delay="0.2s">
-						<div class="case-box modern-case">
-							<h3>Smart Invoice Analyzer</h3>
-							<p><strong>Problem:</strong> Manual invoice entry caused delays & errors.</p>
-							<p><strong>Solution:</strong> Python automation + ML forecasting.</p>
-							<p><strong>Impact:</strong> Faster processing & data-driven planning.</p>
+					<!-- Project 1 -->
+					<div class="project-card glow-card motion-card" data-wow-delay="0.2s">
+						<h3>Smart Invoice Analyzer</h3>
+						<p>Automated invoice extraction + ML forecasting for predicting sales trends.</p>
 
-							<!-- Blog Redirect Button -->
-							<a href="https://dev.to/sanjaydot/smart-invoice-analyzer-how-i-automated-invoice-processing-predicted-sales-using-machine-learning-41b3"
-								target="_blank" class="case-study-link">
-								Read Full Case Study
-							</a>
+						<a href="https://dev.to/sanjaydot/smart-invoice-analyzer-how-i-automated-invoice-processing-predicted-sales-using-machine-learning-41b3"
+							target="_blank" class="case-study-link">Read Full Case Study</a>
+
+						<div class="tags">
+							<span class="tag">Python</span>
+							<span class="tag">Machine Learning</span>
 						</div>
 					</div>
 
-					<!-- BOX 2 -->
-					<div class="masonry-item wow fadeInUp" data-wow-delay="0.3s">
-						<div class="case-box modern-case">
-							<h3>Custom AI Chatbot</h3>
-							<p><strong>Problem:</strong> Teams struggled locating internal data.</p>
-							<p><strong>Solution:</strong> LLM chatbot using Mistral + LangChain.</p>
-							<p><strong>Impact:</strong> 60% faster internal data retrieval.</p>
+					<!-- Project 2 -->
+					<div class="project-card glow-card motion-card" data-wow-delay="0.3s">
+						<h3>Custom AI Chatbot</h3>
+						<p>Mistral + LangChain chatbot that speeds up internal knowledge retrieval by 60%.</p>
+						
+						<a href="https://dev.to/sanjaydot/building-an-ai-powered-sql-chatbot-with-langchain-mistral-streamlit-a08" target="_blank" class="case-study-link">Read Full Case Study</a>
+
+						<div class="tags">
+							<span class="tag">LLM</span>
+							<span class="tag">LangChain</span>
 						</div>
 					</div>
 
-					<!-- BOX 3 -->
-					<div class="masonry-item wow fadeInUp" data-wow-delay="0.4s">
-						<div class="case-box modern-case">
-							<h3>N8N Automation — Telegram Bot</h3>
-							<p><strong>Problem:</strong> Posting updates manually caused delays.</p>
-							<p><strong>Solution:</strong> N8N workflow + Telegram bot automation</p>
-							<p><strong>Impact:</strong> 90% reduction in manual work.</p>
+					<!-- Project 3 -->
+					<div class="project-card glow-card motion-card" data-wow-delay="0.4s">
+						<h3>N8N Automation Suite</h3>
+						<p>Built automations using n8n + Gemini AI:
+							LinkedIn auto-posting (gNews), Telegram weather alerts, and content rewriting.</p>
+						<a href="https://dev.to/sanjaydot/automating-my-daily-workflow-with-n8n-python-gemini-ai-1a1c" target="_blank" class="case-study-link">Read Full Case Study</a>
+						<div class="tags">
+							<span class="tag">n8n</span>
+							<span class="tag">Gemini AI</span>
+							<span class="tag">Python</span>
 						</div>
 					</div>
 
-					<!-- BOX 4 -->
-					<div class="masonry-item wow fadeInUp" data-wow-delay="0.5s">
-						<div class="case-box modern-case">
-							<h3>LogSight — CloudWatch Log Analytics</h3>
-							<p><strong>Problem:</strong> No centralized visibility into application logs & errors.
-							</p>
-							<p><strong>Solution:</strong> Python + FastAPI backend, Streamlit dashboard, SQLite DB,
-								AWS integration.</p>
-							<p><strong>Impact:</strong> 5× faster debugging & real-time alert insights.</p>
+					<!-- Project 4 -->
+					<div class="project-card glow-card motion-card" data-wow-delay="0.5s">
+						<h3>LogInSight — CloudWatch Analytics</h3>
+						<p>Real-time CloudWatch log analytics dashboard with FastAPI + Streamlit.</p>
 
-							<!-- Blog Redirect Button -->
-							<a href="https://dev.to/sanjaydot/loginsight-a-lightweight-cloudwatch-log-analytics-tool-for-faster-debugging-and-real-time-insights-344m"
-								target="_blank" class="case-study-link">
-								Read Full Case Study
-							</a>
+						<a href="https://dev.to/sanjaydot/loginsight-a-lightweight-cloudwatch-log-analytics-tool-for-faster-debugging-and-real-time-insights-344m"
+							target="_blank" class="case-study-link">Read Full Case Study</a>
+
+						<div class="tags">
+							<span class="tag">AWS</span>
+							<span class="tag">FastAPI</span>
+							<span class="tag">Streamlit</span>
 						</div>
-
 					</div>
+
 				</div>
 			</div>
 		</div>
+
 
 
 
@@ -380,6 +381,45 @@
 			</div>
 		</footer>
 	</div>
+	<script>
+		document.querySelectorAll(".project-card").forEach(card => {
+
+			card.addEventListener("mousemove", (e) => {
+				const rect = card.getBoundingClientRect();
+				const x = e.clientX - rect.left - rect.width / 2;
+				const y = e.clientY - rect.top - rect.height / 2;
+
+				card.style.transform = `
+            perspective(900px)
+            rotateX(${-(y / 30)}deg)
+            rotateY(${x / 30}deg)
+            translateY(-10px)
+            scale(1.04)
+        `;
+
+				// Glow position
+				card.style.setProperty("--x", `${e.clientX - rect.left}px`);
+				card.style.setProperty("--y", `${e.clientY - rect.top}px`);
+			});
+
+			card.addEventListener("mouseleave", () => {
+				card.style.transform = "translateY(0px) scale(1) rotateX(0deg)";
+			});
+		});
+	</script>
+<script>
+document.querySelectorAll(".glow-card").forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty("--x", x + "px");
+        card.style.setProperty("--y", y + "px");
+    });
+});
+</script>
+
+
 	<script>
 		document.querySelector("form").addEventListener("submit", async function (e) {
 			e.preventDefault();
