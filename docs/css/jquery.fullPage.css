@@ -216,4 +216,47 @@ html, body {
 
 /* .fp-exp{
     height: 400px !important;
-} */ */
+} */
+
+/* ============================================
+   FULLPAGE.JS MOBILE OVERRIDE (NO SECTION CUTS)
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    html, body {
+        height: auto !important;
+        overflow-y: auto !important;
+        overflow-x: hidden !important;
+    }
+
+    #superContainer {
+        height: auto !important;
+        position: relative !important;
+        touch-action: auto !important;
+    }
+
+    /* Disable fullPage.js fixed height */
+    .fp-section,
+    .fp-slide,
+    .fp-tableCell,
+    .fp-slides,
+    .fp-slidesContainer {
+        height: auto !important;
+        min-height: auto !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    .fp-scrollable,
+    .fp-overflow {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    /* Remove vertical centering forced by fullPage.js */
+    .fp-tableCell {
+        vertical-align: top !important;
+    }
+
+}
