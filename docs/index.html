@@ -407,18 +407,42 @@
 			});
 		});
 	</script>
-<script>
+	<script>
+// Enable mobile glow effect
 document.querySelectorAll(".glow-card").forEach(card => {
+
+    // 1️⃣ Desktop mouse movement
     card.addEventListener("mousemove", (e) => {
         const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty("--x", x + "px");
-        card.style.setProperty("--y", y + "px");
+        card.style.setProperty("--x", `${e.clientX - rect.left}px`);
+        card.style.setProperty("--y", `${e.clientY - rect.top}px`);
+    });
+
+    // 2️⃣ Mobile touch movement
+    card.addEventListener("touchmove", (e) => {
+        const touch = e.touches[0];
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--x", `${touch.clientX - rect.left}px`);
+        card.style.setProperty("--y", `${touch.clientY - rect.top}px`);
+        card.classList.add("glow-active"); // force glow
+    });
+
+    // 3️⃣ Mobile touch start → show glow
+    card.addEventListener("touchstart", (e) => {
+        const touch = e.touches[0];
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty("--x", `${touch.clientX - rect.left}px`);
+        card.style.setProperty("--y", `${touch.clientY - rect.top}px`);
+        card.classList.add("glow-active");
+    });
+
+    // 4️⃣ Touch end → hide glow
+    card.addEventListener("touchend", () => {
+        card.classList.remove("glow-active");
     });
 });
-</script>
 
+</script>
 
 	<script>
 		document.querySelector("form").addEventListener("submit", async function (e) {
