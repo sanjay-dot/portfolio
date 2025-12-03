@@ -984,59 +984,323 @@ footer hr
     transform: translateY(-2px);
 }
 
-/* ------------------------------
-   Cursor Glow – Lavender
---------------------------------*/
+/* ======================================
+   DESKTOP + MOBILE GLOW (WORKING VERSION)
+   ====================================== */
+
+/* Base card required for glow */
+.glow-card {
+    position: relative !important;
+    overflow: visible !important; /* glow must escape */
+}
+
+/* Glow element */
 .glow-card::after {
     content: "";
     position: absolute;
-    top: var(--y);
-    left: var(--x);
+    top: var(--y, 50%);
+    left: var(--x, 50%);
     width: 230px;
     height: 230px;
     transform: translate(-50%, -50%);
     background: radial-gradient(
         circle,
-        rgba(200, 140, 255, 0.55),
-        rgba(160, 90, 255, 0.1),
+        rgba(200, 140, 255, 0.75),
+        rgba(160, 90, 255, 0.25),
         transparent 70%
     );
     opacity: 0;
     pointer-events: none;
     border-radius: 50%;
-    filter: blur(45px);
-    transition: opacity 0.35s ease-out;
+    filter: blur(35px);
+    transition: opacity 0.28s ease-out;
 }
 
-.glow-card:hover::after {
+/* Show glow */
+.glow-card:hover::after,
+.glow-card.glow-active::after {
     opacity: 1;
 }
 
-/* ------------------------------
-   3D Tilt + Parallax Hover 
---------------------------------*/
-.motion-card {
-    transform-style: preserve-3d;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+/* ======================================
+   MOBILE FIXES (THE IMPORTANT PART)
+   ====================================== */
+@media (max-width: 768px) {
+
+    /* 1 — Stop floating animation (breaks glow) */
+    .motion-card {
+        animation: none !important;
+        transform: none !important;
+    }
+
+    /* 2 — Reduce glow size for mobile */
+    .glow-card::after {
+        width: 160px !important;
+        height: 160px !important;
+        filter: blur(20px) !important;
+        background: radial-gradient(
+            circle,
+            rgba(200, 140, 255, 0.85),
+            rgba(160, 90, 255, 0.28),
+            transparent 60%
+        );
+    }
+
+    /* 3 — Ensure NO parent clips the glow */
+    #case-studies,
+    .container,
+    .row,
+    .project-grid,
+    .project-card {
+        overflow: visible !important;
+    }
+
+    /* 4 — Enable touch events (fullPage.js disables them) */
+    #superContainer,
+    .fp-section,
+    .fp-slide,
+    .fp-tableCell {
+        touch-action: auto !important;
+    }
 }
 
-.motion-card:hover {
-    transform: perspective(900px) rotateX(var(--rx)) rotateY(var(--ry)) scale(1.03);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.45);
+
+/* Your existing styles here */
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    #home {
+        padding: 80px 20px !important;
+        text-align: center;
+        background-position: top right !important;
+    }
+
+    #home .home-content {
+        margin-left: 0 !important;
+    }
+
+    .shine-text {
+        font-size: 32px !important;
+    }
+
+    #home h1 {
+        font-size: 28px;
+    }
+
+    #home h2 {
+        font-size: 32px;
+    }
+
+    #home h3 {
+        font-size: 16px;
+    }
+
+    #home p {
+        font-size: 16px;
+    }
 }
 
-/* ------------------------------
-   Auto Floating Animation (Idle)
---------------------------------*/
-.motion-card {
-    animation: floatCard 3s ease-in-out infinite;
+
+/* ============================================
+   WHAT I DO – Perfect Centering on Mobile
+   ============================================ */
+@media (max-width: 768px) {
+
+    /* Make the whole work section centered */
+    #work {
+        text-align: center !important;
+        padding: 70px 20px !important;
+    }
+
+    #work .row {
+        margin: 0 auto !important;
+    }
+
+    /* Force columns to center */
+    #work .col-md-4,
+    #work .col-xs-11 {
+        width: 100% !important;
+        max-width: 350px !important;
+        margin: 0 auto 35px auto !important;
+        float: none !important;
+    }
+
+    /* Center media container */
+    #work .media {
+        display: block !important;
+        width: 100% !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+    }
+
+    /* Center the icon */
+    #work .media-object {
+        margin: 0 auto 15px auto !important;
+        display: block !important;
+        float: none !important;
+    }
+
+    /* Center headings + text */
+    #work .media-body {
+        text-align: center !important;
+        padding: 0 10px !important;
+    }
+
 }
 
-@keyframes floatCard {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-6px); }
-    100% { transform: translateY(0px); }
+/* ============================
+   FIX REVIEWS TEXT COLLAPSE (MOBILE)
+   ============================ */
+@media (max-width: 768px) {
+
+    #reviews {
+        padding: 40px 20px !important;
+    }
+
+    /* Fix image size */
+    .review-pic {
+        width: 110px !important;
+        height: 110px !important;
+    }
+
+    /* Fix text wrapping */
+    .review-text {
+        font-size: 16px !important;
+        line-height: 1.55 !important;
+        padding: 0 15px !important;
+        text-align: center !important;
+        word-wrap: break-word !important;
+        white-space: normal !important;
+    }
+
+    /* Fix spacing */
+    #reviewSlider .carousel-inner .item {
+        padding: 20px 10px !important;
+        min-height: unset !important;
+    }
+
+    /* Reviewer name spacing */
+    #reviews h4 {
+        font-size: 16px !important;
+        margin-top: 10px !important;
+    }
+
+    /* Fix arrows pushing the text inward */
+    .carousel-control.left,
+    .carousel-control.right {
+        width: 40px !important;
+    }
+
+    .carousel-control.left span,
+    .carousel-control.right span {
+        font-size: 32px !important;
+    }
+
+    /* Centers arrows vertically */
+    .carousel-control {
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+    }
+
+    /* Stack wrapper vertically */
+    .review-wrapper {
+        flex-direction: column !important;
+        gap: 20px !important;
+        padding: 0 !important;
+    }
 }
+/* ============================================
+   CONTACT SECTION — MOBILE RESPONSIVE FIX
+   ============================================ */
+
+@media (max-width: 768px) {
+
+    /* Outer spacing */
+    #contact, 
+    .contact-section {
+        padding: 50px 18px !important;
+    }
+
+    /* Stack columns */
+    .contact-row {
+        flex-direction: column !important;
+        gap: 25px !important;
+        width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* Both panels full width */
+    .contact-info, 
+    .contact-form {
+        width: 100% !important;
+    }
+
+    /* Info cards */
+    .contact-info .info-card {
+        width: 100% !important;
+        padding: 16px !important;
+        margin-bottom: 12px !important;
+        border-radius: 12px !important;
+    }
+
+    /* Form container */
+    .contact-form {
+        padding: 18px !important;
+        border-radius: 12px !important;
+    }
+
+    /* Inputs / Textarea */
+    .floating input,
+    .floating textarea {
+        font-size: 14px !important;         /* 🔥 Reduced from 15px */
+        padding: 12px !important;
+        line-height: 1.35 !important;
+        border-radius: 10px !important;
+    }
+
+    /* Textarea height */
+    .floating textarea {
+        min-height: 140px !important;       /* 🔥 Better mobile height */
+    }
+
+    /* Labels */
+    .floating label {
+        font-size: 13px !important;         /* 🔥 Reduced */
+        left: 14px !important;
+        top: 16px !important;
+        padding: 0 6px !important;
+    }
+
+    /* When lifted */
+    .floating input:focus + label,
+    .floating input:not(:placeholder-shown) + label,
+    .floating textarea:focus + label,
+    .floating textarea:not(:placeholder-shown) + label {
+        font-size: 11px !important;         /* 🔥 Clean small lifted label */
+        top: -8px !important;
+    }
+
+    /* Submit button */
+    .btn-submit {
+        font-size: 16px !important;         /* 🔥 Reduced from 17–18px */
+        padding: 14px !important;
+        width: 100% !important;
+        border-radius: 10px !important;
+        margin-top: 8px !important;
+    }
+
+    /* Contact header typography */
+    .contact-header h2 {
+        font-size: 26px !important;
+        line-height: 1.25 !important;
+    }
+
+    .contact-header p {
+        font-size: 15px !important;
+        padding: 0 8px !important;
+    }
+}
+
 
 
 
